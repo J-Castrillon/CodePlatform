@@ -4,3 +4,5 @@ export type RegisterType = {
     password: String, 
     confirmPassword: String, 
 }
+
+export type LoginType = Pick<RegisterType,'userName'|'password'>

@@ -1,6 +1,19 @@
 import { Link, Outlet } from "react-router-dom";
+import { LoginType } from "../types/register";
+import { useForm } from "react-hook-form";
 
 export const Home = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<LoginType>();
+
+  const handleLogin = (data: LoginType) => {
+    console.log(data);
+  };
+
   return (
     <div>
       <div className="flex flex-row justify-center h-screen items-center">
@@ -9,7 +22,10 @@ export const Home = () => {
             Iniciar sesión
           </h1>
 
-          <form action="#" method="post" className="flex flex-col gap-4 px-8">
+          <form
+            onSubmit={handleSubmit(handleLogin)}
+            className="flex flex-col gap-4 px-8 lg:px-32 lx:px-40"
+          >
             <div className="flex flex-col">
               <label
                 htmlFor="txtUser"
@@ -19,10 +35,16 @@ export const Home = () => {
               </label>
               <input
                 type="text"
-                name="txtUser"
                 id="txtUser"
                 placeholder="Ingresa tu usuario"
-                className="border border-slate-500 rounded-md p-2"
+                className={`border border-slate-500 rounded-md p-2 ${
+                  errors.userName
+                    ? "border-t-2 border-r-2 border-b-2 border-l-8 border-red-300"
+                    : "border-2 border-gray-100"
+                }`}
+                {...register("userName", {
+                  required: "Campo obligatorio",
+                })}
               />
             </div>
 
@@ -36,10 +58,16 @@ export const Home = () => {
 
               <input
                 type="password"
-                name="txtPassword"
                 id="txtPassword"
                 placeholder="Ingresa tu contraseña"
-                className="border border-slate-500 rounded-md p-2"
+                className={`border border-slate-500 rounded-md p-2 ${
+                  errors.password
+                    ? "border-t-2 border-r-2 border-b-2 border-l-8 border-red-300"
+                    : "border-2 border-gray-100"
+                }`}
+                {...register("password", {
+                  required: "Campo obligatorio",
+                })}
               />
             </div>
 
@@ -52,7 +80,7 @@ export const Home = () => {
               </button>
               <div className="flex justify-between">
                 <Link
-                  to="#"
+                  to="/register"
                   className="hover:text-indigo-400 font-semibold text-sm mt-2 text-slate-200 leading-6"
                 >
                   ¡Regístrate!
