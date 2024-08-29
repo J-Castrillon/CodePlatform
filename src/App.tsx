@@ -4,9 +4,9 @@ import { Router } from './routers/Router'
 function App() {
 
   return (
-    <>
+    <div className=''>
       <Router/>
-    </>
+    </div>
   )
 }
 
