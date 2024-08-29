@@ -1,10 +1,11 @@
 import './App.css'
+import { Router } from './routers/Router'
 
 function App() {
 
   return (
     <>
-      <h1 className="text-red-900">Hola mundo</h1>
+      <Router/>
     </>
   )
 }
