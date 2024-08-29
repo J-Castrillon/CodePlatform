@@ -4,7 +4,7 @@ import { Router } from './routers/Router'
 function App() {
 
   return (
-    <div className=''>
+    <div className='bg-bkg'>
       <Router/>
     </div>
   )
