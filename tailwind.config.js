@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         ahvr: "#363537",
+        bkg: "#1A191E", 
       },
     },
   },
