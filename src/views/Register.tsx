@@ -1,6 +1,19 @@
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { RegisterType } from "../types/register";
 
 export const Register = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<RegisterType>();
+
+  const handleRegister = (data: RegisterType) => {
+    
+  }
+
   return (
     <div className="flex flex-row justify-between h-screen">
       <section
@@ -16,7 +29,7 @@ export const Register = () => {
 
         <div className="container">
           <form
-            action=""
+            onSubmit={handleSubmit(handleRegister)}
             className="flex flex-col justify-center gap-3 sm:px-10 md:px-32 mt-10"
           >
             <label
@@ -28,7 +41,14 @@ export const Register = () => {
                 type="email"
                 id="email"
                 placeholder="email@email.com"
-                className="p-2  border-2 text-lgx bg-transparent text-slate-100 rounded-lg"
+                className={`bg-transparent text-slate-100 p-2 rounded-lg ${
+                  errors.email
+                    ? "border-t-2 border-r-2 border-b-2 border-l-8 border-red-300"
+                    : "border-2 border-gray-100"
+                }`}
+                {...register("email", {
+                  required: "🚨 Campo requerido",
+                })}
               />
             </label>
             <label
@@ -40,7 +60,14 @@ export const Register = () => {
                 type="text"
                 id="userName"
                 placeholder="Pedro..."
-                className="p-2  border-2 text-lgx bg-transparent text-slate-100 rounded-lg"
+                className={`bg-transparent text-slate-100 p-2 rounded-lg ${
+                  errors.userName
+                    ? "border-t-2 border-r-2 border-b-2 border-l-8 border-red-300"
+                    : "border-2 border-gray-100"
+                }`}
+                {...register("userName", {
+                  required: "🚨 Campo requerido",
+                })}
               />
             </label>
             <label
@@ -52,7 +79,13 @@ export const Register = () => {
                 type="password"
                 id="password"
                 placeholder="Clave"
-                className="p-2  border-2 text-lgx bg-transparent text-slate-100 rounded-lg"
+                className={`bg-transparent text-slate-100 p-2 rounded-lg ${
+                  errors.password
+                    ? "border-t-2 border-r-2 border-b-2 border-l-8 border-red-300"
+                    : "border-2 border-gray-100"
+                }`}                {...register("password", {
+                  required: "🚨 Campo requerido",
+                })}
               />
             </label>
             <label
@@ -62,9 +95,15 @@ export const Register = () => {
               <span>Confirmación de contraseña:</span>
               <input
                 type="password"
-                id="passwordConfirm"
+                id="confirmPassword"
                 placeholder="Confirma tu clave"
-                className="p-2 border-2 text-lgx bg-transparent text-slate-100 rounded-lg"
+                className={`bg-transparent text-slate-100 p-2 rounded-lg ${
+                  errors.confirmPassword
+                    ? "border-t-2 border-r-2 border-b-2 border-l-8 border-red-300"
+                    : "border-2 border-gray-100"
+                }`}                {...register("confirmPassword", {
+                  required: "🚨 Campo requerido",
+                })}
               />
             </label>
             <button
@@ -76,7 +115,13 @@ export const Register = () => {
             </button>
           </form>
           <p className="text-md text-slate-200 text-center mt-2">
-            ¿Ya tienes una cuenta? <Link to="/" className="text-indigo-500 hover:text-indigo-600 font-semibold underline">Inicia Sesión</Link>
+            ¿Ya tienes una cuenta?{" "}
+            <Link
+              to="/"
+              className="text-indigo-500 hover:text-indigo-600 font-semibold underline"
+            >
+              Inicia Sesión
+            </Link>
           </p>
         </div>
       </section>
